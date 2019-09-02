@@ -3,5 +3,6 @@
   hosts: winserver
   gather_facts: no  
   roles:
-     - install-dotnet-agent
+     - install-dotnet-appagent
+     - install-dotnet-machineagent
      
