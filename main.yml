@@ -1,8 +1,9 @@
 ---
 - name: Provision Agents on Windows
   hosts: winserver
-  gather_facts: no  
+  gather_facts: yes
   roles:
      - install-dotnet-appagent
      - install-dotnet-machineagent
-     
+     - install-dotnet-analyticsagent
+   
