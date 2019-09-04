@@ -1,11 +1,17 @@
 ---
 - name: Provision Agents on Windows
   hosts: winserver
-  gather_facts: yes
+  gather_facts: no  
   roles:
+<<<<<<< HEAD
   #   - install-dotnet-appagent
   #   - install-dotnet-machineagent
   #   - install-dotnet-analyticsagent
      - install-windows-java-appagent
   #   - install-windows-tomcat-appagent
    
+=======
+     - install-dotnet-appagent
+     - install-dotnet-machineagent
+     
+>>>>>>> parent of d54878a... Adding analytics agent scripts

@@ -1,20 +1,39 @@
 ---
+<<<<<<< HEAD:roles/install-windows-analyticsagent/tasks/main.yml
 - include_vars: windows-analyticsagent-vars.yml
+=======
+- include_vars: dotnet-machineagent-vars.yml
+>>>>>>> parent of d54878a... Adding analytics agent scripts:roles/install-dotnet-analyticsagent/tasks/main.yml
 
 - name: Unzip .Net Machine Agent
   win_unzip:
     src: "C:\\tmp\\{{ zip_file }}"
     dest: "{{ install_path }}"
     creates: "{{ install_path }}"
-
-- name: Template analytics properties file for install
-  win_template:
-    src: "{{ analytics_properties }}.j2"
-    dest: "{{ install_path }}\\monitors\\analytics-agent\\conf\\{{ analytics_properties }}"
     register: result
 
-- name: Restart Machine Agent
+- name: Template controller config file for install
+  win_template:
+    src: "{{ controller_xml }}.j2"
+    dest: "{{ install_path }}\\conf\\{{ controller_xml }}"
+
+- name: Install Machine Agent as a service
+  win_shell: "cscript {{ install_path }}\\InstallService.vbs" 
+  args:
+    executable: cmd
+  register: service_install
+
+- name: Start Machine Agent
   win_service:
     name: Appdynamics Machine Agent
-    state: restarted
-    when: result is succeeded
+    state: started
+    when: service_install is succeeded
+
+
+# - name: Template analytics config file for install
+#   win_template:
+#     src: "{{ analytics_properties }}.j2"
+#     dest: "{{ install_path }}\\monitors\\analytics-agent\\conf\\{{ analytics_properties }}"
+
+# - name: Install Analytics Agent as a service 
+#   win_command: "cscript "    
