@@ -1,0 +1,30 @@
+---
+- include_vars: tomcat-agent-vars.yml
+
+- name: Create a directory if it does not exist
+  win_file:
+    path: "{{ binary_path }}"
+    state: directory
+
+
+- name: zip extract app agent binaries
+  win_unzip:
+    src: "c:\\tmp\\{{ zip_file }}"
+    dest: "{{ binary_path }}"
+    creates: "{{ binary_path }}\\conf"
+
+
+- name: Template config file to install folder
+  win_template:
+    src: "{{ controller_xml }}.j2"
+    dest: "{{ binary_path }}\\conf\\{{ controller_xml }}"
+
+#- name: Template config file to install folder
+#  win_template:
+#    src: "{{ set_config }}.j2"
+#    dest: "\"C:\\tmp\\\"{{ set_config }}"
+
+- name: Restart Tomcat Service
+  win_service: 
+    name: Tomcat8
+    state: restarted
