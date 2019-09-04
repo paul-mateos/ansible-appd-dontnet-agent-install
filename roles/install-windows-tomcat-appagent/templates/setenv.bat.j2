@@ -1,6 +1,6 @@
 @echo off
  
-set CATALINA_OPTS=%CATALINA_OPTS% -Dallow.unsigned.sdk.extension.jars=true -javaagent:{{ binary_path }}\\javaagent.jar
+set CATALINA_OPTS=%CATALINA_OPTS% -Dallow.unsigned.sdk.extension.jars=true -javaagent:"{{ binary_path }}\javaagent.jar"
  
 set APPDYNAMICS_CONTROLLER_HOST_NAME="{{ controller_host }}"
 set APPDYNAMICS_CONTROLLER_PORT="{{ controller_port }}"
