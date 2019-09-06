@@ -2,8 +2,8 @@
 #install varaiables
 binary_path: "C:\\appdynamics\\app-agent"
 zip_file: "AppServerAgent-4.5.12.27094.zip"
-set_config: "setenv.bat"
-controller_xml: "controler-info.xml"
+set_config: "jvm_options.bat"
+controller_xml: "controller-info.xml"
 tomcat_bin: "C:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\bin"
 
 #config template variables

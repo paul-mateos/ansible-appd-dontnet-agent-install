@@ -17,6 +17,19 @@
     src: "{{ set_config }}.j2"
     dest: "{{ tomcat_bin }}\\{{ set_config }}"
 
+- name: Template config file to install folder
+  template:
+    src: "{{ controller_xml }}.j2"
+    dest: "{{ binary_path }}\\conf\\{{ controller_xml }}"
+
+- name: Stop Tomcat Service
+  win_service: 
+    name: Tomcat8
+    state: stopped
+
+- name: Update Tomcat JAVA_OPT
+  win_command: cmd.exe C:\Program Files\Apache Software Foundation\Tomcat 8.5\bin\Tomcat8 //ES//Tomcat8 ++JvmOptions=-javaagent:C:\appdynamics\app-agent\javaagent.jar
+
 - name: Restart Tomcat Service
   win_service: 
     name: Tomcat8

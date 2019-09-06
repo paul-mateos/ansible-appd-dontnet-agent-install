@@ -3,8 +3,8 @@
   hosts: winserver
   gather_facts: yes  
   roles:
-  #   - install-dotnet-appagent
+     - install-dotnet-appagent
   #   - install-dotnet-machineagent
   #   - install-dotnet-analyticsagent
   #   - install-windows-java-appagent
-     - install-windows-tomcat-appagent
+  #   - install-windows-tomcat-appagent

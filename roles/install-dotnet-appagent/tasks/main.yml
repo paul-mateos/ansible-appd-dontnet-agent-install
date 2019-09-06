@@ -11,15 +11,17 @@
     src: "{{ setup_file }}.j2"
     dest: "{{ msi_path }}\\{{ setup_file }}"
 
-- name: Install .Net Agent
-  win_package:
-    path: "C:\\tmp\\{{ msi_file }}"
-    arguements: 
-    - /q 
-    - /norestart 
-    - -s "{{ msi_path }}\\{{ setup_file }}"
-    register: result
-    state: present
+# - name: Install .Net Agent
+#   win_package:
+#     path: "C:\\tmp\\dotNetAgentSetup64-4.5.12.0.msi"
+#     arguements: "AD_SetupFile=C:\\tmp\\AppDynamics\\setupconfig.xml"
+#     register: result
+#     state: present
+#     log_path: "C:\\tmp\\AgentInstaller.log"
+
+- name: Install .Net Agent 
+  win_command: msiexec.exe /i C:\tmp\dotNetAgentSetup64-4.5.12.0.msi /quiet /norestart /lv C:\tmp\AgentInstaller.log AD_SetupFile=C:\tmp\AppDynamics\setupconfig.xml
+
 
 - name: Start Agent
   win_service:
